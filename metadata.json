@@ -1,0 +1,7 @@
+{
+  "name": "Joint Market Assessment — Gempa Flores 2026",
+  "description": "Dashboard pendukung keputusan lintas lembaga untuk Joint Market Assessment pascagempa Flores 2026. Hanya memuat data agregat anonim.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
