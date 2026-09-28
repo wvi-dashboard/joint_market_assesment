@@ -354,22 +354,77 @@ a { color: var(--c-info); }
 .g-3 { grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
 .mb { margin-bottom: 18px; }
 
-/* Horizontal scroll for Main Signals */
+/* Horizontal scroll for Main Signals with visible custom scrollbar and controls */
+.signals-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0 10px;
+}
+.signals-hd h2 {
+  margin: 0;
+}
+.signals-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-scroll {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all .15s ease;
+}
+.btn-scroll:hover {
+  background: var(--surface-2);
+  border-color: var(--line-strong);
+  color: var(--wv-orange);
+  transform: scale(1.05);
+}
+.btn-scroll:active {
+  transform: scale(0.95);
+}
 .signals-scroll {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   gap: 14px;
-  padding: 6px 4px 16px 4px;
+  padding: 8px 4px 14px 4px;
   margin: 0 -4px 18px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  cursor: grab;
+  user-select: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) var(--surface-2);
+}
+.signals-scroll.grabbing {
+  cursor: grabbing;
+  scroll-behavior: auto;
 }
 .signals-scroll::-webkit-scrollbar {
-  display: none;
+  display: block;
+  height: 7px;
+}
+.signals-scroll::-webkit-scrollbar-track {
+  background: var(--surface-2);
+  border-radius: 4px;
+}
+.signals-scroll::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 4px;
+}
+.signals-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--wv-orange);
 }
 .signals-scroll > *,
 .signals-scroll > .card,
@@ -378,6 +433,69 @@ a { color: var(--c-info); }
   flex-shrink: 0;
   width: 230px;
   min-width: 210px;
+}
+.closing-copyright-br {
+  position: absolute;
+  bottom: clamp(14px, 3vw, 24px);
+  right: clamp(18px, 4vw, 36px);
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  text-align: right;
+  z-index: 10;
+  pointer-events: none;
+}
+@media print {
+  #sidebar, #topbar, .burger, #loader, .meta summary, #cover, #closing, .signals-nav, #btn-reset, #btn-csv, #chips, .fb-actions, .fpanel {
+    display: none !important;
+  }
+  #shell {
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  #main {
+    padding: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+  .card {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    box-shadow: none !important;
+    border-color: #d9d6d1 !important;
+    margin-bottom: 14px !important;
+  }
+  .print-page-section {
+    page-break-after: always !important;
+    break-after: page !important;
+    padding-bottom: 24px !important;
+  }
+  .print-sec-header {
+    border-bottom: 2px solid var(--wv-orange) !important;
+    padding-bottom: 6px !important;
+    margin-bottom: 16px !important;
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    color: var(--wv-orange) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+  }
+  .signals-scroll {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    overflow: visible !important;
+    gap: 10px !important;
+  }
+  .signals-scroll > * {
+    width: auto !important;
+    min-width: 0 !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 }
 
 /* Minimalist copyright footer */
@@ -1150,11 +1268,13 @@ table.tbl.hm tbody tr:hover { background: transparent; }
     <div class="cover-rule" aria-hidden="true"></div>
     <h1 id="closing-title">Evidence for Better<br>Humanitarian Decisions</h1>
     <p class="cover-sub" data-i18n="closingSubId">Bukti untuk Mendukung Keputusan Kemanusiaan yang Lebih Baik</p>
-    <p class="cover-kicker">Program Evidence, Accountability, Research and Learning</p>
     <div class="cover-acts">
       <button id="btn-closing-back" class="btn btn-primary" data-i18n="backDash">Kembali ke Dashboard</button>
     </div>
     <p class="cover-foot" data-i18n="copyshort"></p>
+  </div>
+  <div class="closing-copyright-br">
+    Copyright by Ersa William Lakukua PEARL Lead Wahana Visi Indonesia
   </div>
 </div>
 
@@ -1211,6 +1331,9 @@ table.tbl.hm tbody tr:hover { background: transparent; }
           <button id="btn-closing-top" class="ic-btn" data-i18n-aria="closingBtn" data-i18n-title="closingBtn">
             <svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4.8h11.5l-1.8 3.6 1.8 3.6H5"/></svg>
           </button>
+          <button id="btn-print" class="ic-btn" aria-label="Cetak Semua Dokumen" title="Cetak Semua Dokumen" data-i18n-title="printDoc" data-i18n-aria="printDoc">
+            <svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          </button>
 
           <span class="tb-sep" aria-hidden="true"></span>
 
@@ -1232,7 +1355,6 @@ table.tbl.hm tbody tr:hover { background: transparent; }
   </header>
 
   <main id="main" tabindex="-1"></main>
-  <footer class="min-footer">Copyright by Ersa William Lakukua PEARL Lead Wahana Visi Indonesia</footer>
 
 </div>
 
@@ -1310,7 +1432,7 @@ const I18N = {
     toCover: 'Sampul', toCoverAria: 'Kembali ke sampul', enterDash: 'Jelajahi Dashboard',
     closingBtn: 'Penutup', backDash: 'Kembali ke Dashboard',
     closingSubId: 'Bukti untuk Mendukung Keputusan Kemanusiaan yang Lebih Baik',
-    coverClose: 'Tutup sampul', closingClose: 'Tutup penutup',
+    coverClose: 'Tutup sampul', closingClose: 'Tutup penutup', printDoc: 'Cetak Semua Dokumen',
     footNote: 'Persentase dihitung dari responden terkaji atau jawaban valid, bukan estimasi populasi · sel dengan jawaban valid kurang dari 5 disuppress',
     copyshort: 'Wahana Visi Indonesia · 2026',
     closingMethod: 'Metodologi, kualitas data, dan metadata indikator',
@@ -1369,7 +1491,7 @@ const I18N = {
     toCover: 'Cover', toCoverAria: 'Back to cover', enterDash: 'Explore Dashboard',
     closingBtn: 'Closing', backDash: 'Back to Dashboard',
     closingSubId: 'Bukti untuk Mendukung Keputusan Kemanusiaan yang Lebih Baik',
-    coverClose: 'Close cover', closingClose: 'Close',
+    coverClose: 'Close cover', closingClose: 'Close', printDoc: 'Print All Documents',
     footNote: 'Percentages are of assessed respondents or valid responses, not population estimates · cells with fewer than 5 valid responses are suppressed',
     copyshort: 'Wahana Visi Indonesia · 2026',
     closingMethod: 'Methodology, data quality and indicator metadata',
@@ -2780,8 +2902,18 @@ function secOverview() {
   return head('Ringkasan', 'Overview',
     `<span class="sm"><b>${recordCount()}</b> ${L('record terpilih', 'records selected')}</span>` + grpMeta('HH', 'TRD', 'GOV', 'FSP', 'NGO'))
     + `<div class="grid g-kpi mb">${kpis}</div>`
-    + `<h2>${L('Sinyal utama', 'Key signals')}</h2>`
-    + `<div class="signals-scroll mb">${signals}</div>`
+    + `<div class="signals-hd">
+        <h2>${L('Sinyal utama', 'Key signals')}</h2>
+        <div class="signals-nav">
+          <button type="button" class="btn-scroll" onclick="scrollSignals(-1)" aria-label="${L('Geser ke kiri', 'Scroll left')}" title="${L('Geser ke kiri', 'Scroll left')}">
+            <svg viewBox="0 0 24 24" class="ic"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="btn-scroll" onclick="scrollSignals(1)" aria-label="${L('Geser ke kanan', 'Scroll right')}" title="${L('Geser ke kanan', 'Scroll right')}">
+            <svg viewBox="0 0 24 24" class="ic"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>`
+    + `<div class="signals-scroll mb" id="signals-scroll">${signals}</div>`
     + `<div class="grid g-2 mb">
         ${dimBar('grp', L('Kelompok responden', 'Respondent group'), 'info')}
         ${dimBar('org', L('Lembaga pengumpul data', 'Data-collecting agency'), 'info')}</div>`
@@ -2990,8 +3122,7 @@ function secCVA() {
     + `<div class="grid g-2 mb">${hbar('hh_fsp_barrier')}${hbar('hh_fsp_used')}</div>`
     + `<div class="grid g-3 mb">${stacked('hh_docs')}${stacked('hh_cva_know')}${stacked('hh_conflict')}</div>`
     + `<div class="grid g-2 mb">${hbar('p_cva_risk')}${hbar('n_cva_risk', { sort: false })}</div>`
-    + `<div class="grid g-2">${stacked('t_voucher')}${stacked('l_willing')}</div>`
-    + `<footer class="min-footer">Copyright by Ersa William Lakukua PEARL Lead Wahana Visi Indonesia</footer>`;
+    + `<div class="grid g-2">${stacked('t_voucher')}${stacked('l_willing')}</div>`;
 }
 
 /** Five household readiness indicators laid out per kabupaten.
@@ -3290,6 +3421,9 @@ function render() {
     document.getElementById('main').innerHTML = s.build();
     animateNumbers();
     initChartAnimations();
+    if (ACTIVE === 'overview') {
+      initSignalsScroll();
+    }
   } catch (err) {
     document.getElementById('main').innerHTML =
       `<div class="card"><h3>${L('Bagian ini gagal dimuat', 'This section failed to load')}</h3>
@@ -3506,6 +3640,89 @@ function initChartAnimations() {
 
 function downloadCSV() { saveCSV(buildCSV(), 'jma-flores-2026-agregat'); }
 
+/* ---------------------------------------------------------------- signals scroll & print all */
+function initSignalsScroll() {
+  const el = document.getElementById('signals-scroll');
+  if (!el || el.__initScroll) return;
+  el.__initScroll = true;
+
+  let isDown = false;
+  let startX = 0;
+  let scrollLeft = 0;
+
+  el.addEventListener('mousedown', e => {
+    if (e.target.closest('button') || e.target.closest('a')) return;
+    isDown = true;
+    el.classList.add('grabbing');
+    startX = e.pageX - el.offsetLeft;
+    scrollLeft = el.scrollLeft;
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDown = false;
+    if (el) el.classList.remove('grabbing');
+  });
+
+  el.addEventListener('mouseleave', () => {
+    isDown = false;
+    el.classList.remove('grabbing');
+  });
+
+  el.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - startX) * 1.6;
+    el.scrollLeft = scrollLeft - walk;
+  });
+
+  el.addEventListener('wheel', e => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    }
+  }, { passive: false });
+}
+
+window.scrollSignals = function(dir) {
+  const el = document.getElementById('signals-scroll');
+  if (el) {
+    el.scrollBy({ left: dir * 300, behavior: 'smooth' });
+  }
+};
+
+function printAllDocuments() {
+  const main = document.getElementById('main');
+  const prevActive = ACTIVE;
+
+  const allSectionsHtml = SECTIONS_UI.map(s => {
+    try {
+      const meta = NAV_LABELS[s.id] || DATA.meta.sections.find(x => x.id === s.id) || { label_id: s.id, label_en: s.id };
+      const label = LANG === 'en' ? meta.label_en : meta.label_id;
+      const content = s.build();
+      return `<section class="print-page-section" data-print-sec="${s.id}">
+        <div class="print-sec-header">
+          <span>Joint Market Assessment Flores 2026 — ${esc(label)}</span>
+        </div>
+        ${content}
+      </section>`;
+    } catch (e) {
+      console.error('Error rendering section for print:', s.id, e);
+      return '';
+    }
+  }).join('');
+
+  main.innerHTML = allSectionsHtml;
+
+  setTimeout(() => {
+    window.print();
+    setTimeout(() => {
+      ACTIVE = prevActive;
+      render();
+    }, 400);
+  }, 350);
+}
+
 /* ---------------------------------------------------------------- boot */
 (async function boot() {
   initTheme();
@@ -3541,6 +3758,8 @@ function downloadCSV() { saveCSV(buildCSV(), 'jma-flores-2026-agregat'); }
 
   document.getElementById('btn-reset').addEventListener('click', resetFilters);
   document.getElementById('btn-csv').addEventListener('click', downloadCSV);
+  const btnPrint = document.getElementById('btn-print');
+  if (btnPrint) btnPrint.addEventListener('click', printAllDocuments);
   document.getElementById('btn-theme').addEventListener('click', () => {
     const root = document.documentElement;
     const dark = root.dataset.theme === 'dark';
