@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Outer double rings -->
+  <circle cx="100" cy="100" r="92" stroke="#555" stroke-width="2.5" fill="#fff"/>
+  <circle cx="100" cy="100" r="84" stroke="#777" stroke-width="1.2" fill="none"/>
+  <circle cx="100" cy="100" r="54" stroke="#888" stroke-width="1" fill="#fdfdfd"/>
+
+  <!-- Top Arc Text: KELOMPOK KERJA -->
+  <defs>
+    <path id="arc-top" d="M 30,100 A 70,70 0 0,1 170,100" fill="none"/>
+    <path id="arc-bottom" d="M 170,100 A 70,70 0 0,1 30,100" fill="none"/>
+  </defs>
+  
+  <text font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#333" letter-spacing="3.2px">
+    <textPath href="#arc-top" startOffset="50%" text-anchor="middle">KELOMPOK KERJA</textPath>
+  </text>
+  
+  <!-- Bottom Arc Text: BANTUAN NON TUNAI -->
+  <text font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#333" letter-spacing="2.5px">
+    <textPath href="#arc-bottom" startOffset="50%" text-anchor="middle">BANTUAN NON TUNAI</textPath>
+  </text>
+
+  <!-- Center Shelter Icon -->
+  <g transform="translate(100, 78) scale(0.95)">
+    <!-- Roof (Green/Teal) -->
+    <path d="M -18,-6 L 0,-22 L 18,-6 L 14,-2 L 0,-14 L -14,-2 Z" fill="#2E7D32"/>
+    <!-- House body (Deep Blue) -->
+    <path d="M -10,-4 L 10,-4 L 10,12 L -10,12 Z" fill="#0277BD"/>
+    <!-- Heart / Hands inside -->
+    <path d="M 0,2 C -4,-3 -8,1 -6,5 L 0,11 L 6,5 C 8,1 4,-3 0,2 Z" fill="#FFC107"/>
+    <!-- Supporting Hands beneath -->
+    <path d="M -22,12 C -18,18 -10,21 0,21 C 10,21 18,18 22,12 C 18,16 10,18 0,18 C -10,18 -18,16 -22,12 Z" fill="#E65100"/>
+  </g>
+
+  <!-- Center Text -->
+  <text x="100" y="120" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#222" text-anchor="middle">Klaster PP</text>
+  <text x="100" y="132" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="8" font-weight="800" fill="#E65100" text-anchor="middle" letter-spacing="0.5px">POKJA BANTU</text>
+</svg>

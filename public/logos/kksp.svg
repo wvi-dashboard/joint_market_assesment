@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+  <!-- Outer Ring -->
+  <circle cx="80" cy="68" r="62" stroke="#E01E26" stroke-width="4.5" fill="#fff"/>
+  <!-- Dove holding twig above -->
+  <path d="M72 26 C75 22 81 20 86 23 C90 26 89 31 85 34 C82 36 78 35 75 33 L73 34 C72 36 70 38 67 37 C64 36 65 33 67 31 C69 29 70 28 72 26 Z" fill="#E01E26"/>
+  <path d="M68 28 C64 26 62 23 60 20 C62 23 65 24 68 25" stroke="#E01E26" stroke-width="2" stroke-linecap="round"/>
+  <!-- Pen (left) and Hammer (right) shaft -->
+  <rect x="24" y="64" width="112" height="9" rx="2" fill="#E01E26"/>
+  <!-- Pen Nib (left) -->
+  <path d="M25 61 L6 68.5 L25 76 Z" fill="#E01E26"/>
+  <line x1="12" y1="68.5" x2="25" y2="68.5" stroke="#fff" stroke-width="1.8"/>
+  <!-- Hammer Head (right) -->
+  <rect x="122" y="48" width="22" height="23" rx="3" fill="#E01E26"/>
+  <path d="M124 74 C128 85 136 94 146 100 L140 102 C131 95 125 84 122 74 Z" fill="#E01E26"/>
+  <!-- Clenched Fist in Center -->
+  <path d="M66 52 C66 49 70 48 73 51 C75 48 79 48 81 51 C83 48 87 48 89 51 C91 48 95 49 95 53 L95 72 C95 86 91 93 88 100 L72 100 C69 93 66 86 66 72 Z" fill="#E01E26"/>
+  <path d="M62 61 C62 56 66 54 70 57 L70 73 C66 73 62 68 62 61 Z" fill="#E01E26"/>
+  <path d="M73 53 L73 70 M81 53 L81 70 M89 53 L89 70" stroke="#fff" stroke-width="2"/>
+  <!-- Water Waves at bottom of circle -->
+  <path d="M36 108 Q47 101 58 108 T80 108 T102 108 T124 108" stroke="#E01E26" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M42 116 Q53 109 64 116 T86 116 T108 116 T118 116" stroke="#E01E26" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Text KKSP -->
+  <text x="80" y="148" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="24" font-weight="900" fill="#E01E26" text-anchor="middle" letter-spacing="4px">KKSP</text>
+</svg>
